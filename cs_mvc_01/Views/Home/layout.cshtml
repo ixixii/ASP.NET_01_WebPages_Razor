@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    @{
+                    /**/
+
+                    var beyondCss = "../Shared/beyondbasestylewhite3.css";
+                    var beyondButtonCss = "../Shared/beyondbuttongreen.css";
+    }
+    <title>
+        @Page.Title
+        @*@ViewBag.Title*@
+    </title>
+    <meta charset="utf-8" />
+
+    <link rel="stylesheet" type="text/css" href="@Href(beyondCss)" />
+    <link rel="stylesheet" type="text/css" href="@Href(beyondButtonCss)" />
+
+    <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.css" />
+
+
+</head>
+<body>
+    @RenderBody()
+</body>
+</html>

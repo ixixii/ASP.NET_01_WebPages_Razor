@@ -1,0 +1,30 @@
+/*璁剧疆css3鐨勬寜閽牱寮�,input鐨勬寜閽牱寮�*/  
+        button.class_btn {  
+            cursor: pointer;  
+            border:none;  
+            font-size: 16px;  
+            color: black;  
+            text-align: center;  
+            text-decoration: none;  
+            background-color: white;  
+            border-radius: 6px;
+            outline: none;
+            /*鏍稿績浠ｇ爜*/  
+            padding: 16px 32px;  
+            margin: 2px 2px;  
+            display: inline-block;  
+            border:2px solid #4CAF50;  
+  
+            /*鏍稿績浠ｇ爜*/  
+            /*鍏煎Safari*/  
+            -webkit-transition-duration:0.4s;  
+            transition-duration:0.4s;  
+        }  
+        /*绗�1涓豢鑹叉寜閽�*/  
+        button.class_btn_green {  
+            border: 2px solid #4CAF50;  
+        }  
+        button.class_btn_green:hover {  
+            color: white;  
+            background-color: #4CAF50;  
+        } 

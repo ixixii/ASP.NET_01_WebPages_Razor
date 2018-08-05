@@ -1,0 +1,50 @@
+@import url(http://fonts.googleapis.com/css?family=Julius+Sans+One|Libre+Baskerville:400,400italic);
+
+header, section, footer, aside, nav, article, figure
+ { 
+ display: block; 
+ } 
+
+/* 
+	娣辫壊鑳屾櫙,灏辩粰body娣诲姞杩欎釜鏍峰紡
+	id="sgdarkbackground"
+*/
+#sgdarkbackground {
+	background-color: rgb(9,7,26);
+}
+/*
+	渚嬪:姝ｆ枃灞呬腑,瀛椾綋姝ｅ父,棰滆壊鐗瑰畾,灏卞彲浠ヤ娇鐢ㄤ互涓嬬粍鍚�;
+	class="sgcenter sgfontnormal sgcontentcolor"
+*/
+/*灞呬腑*/
+.sgcenter {
+	text-align: center;
+}
+/*瀛椾綋姝ｅ父*/
+.sgfontnormal {
+	font-style: normal;
+}
+
+/*姝ｆ枃棰滆壊*/
+.sgcontentcolor {
+	/*color: rgba(168,168,168,1);*/
+	color: rgba(78,78,78,1);
+}
+/*宸﹀杈硅窛*/
+p {
+	margin-left: 6px;
+}
+
+/* 杩欎釜鏄増鏉� */
+#copyright{
+	color: rgba(113,112,127,0.55);
+	font-size: 18px;
+	text-align: center;	
+	font-family: 'Libre Baskerville', sans-serif;
+	font-style: normal;
+}
+/*杩欎釜鏄綔鑰�*/
+#author{
+	color: rgba(113,112,127,1);
+	font-style: normal;
+}

@@ -1,0 +1,64 @@
+https://www.w3cschool.cn/aspnet/razor-cs-variables.html
+
+
+@* ======================== *@
+<h2>Database Connect</h2>
+@{ 
+    var db = Database.Open("userdb");
+    var queryStr = "SELECT * FROM girl OREDER BY age";
+}
+<table>
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>age</th>
+    </tr>
+
+    @foreach(var row in db.Query(queryStr))
+    {
+        <tr>
+            <td>@row.id</td>
+            <td>@row.id</td>
+            <td>@row.id</td>
+        </tr>
+    }
+
+</table>
+
+
+
+@* ========================= *@
+<h2>Web Grid Usage</h2>
+@{ 
+    var db = Database.Open("girl");
+    var queryStr = "SELECT * FROM girl ORDER BY age";
+    var resultSet = db.Query(queryStr);
+    var grid = new WebGrid(resultSet);
+}
+<div id="id_div_webGrid">
+    @gird.GetHtml()
+</div>
+
+
+@* ========================= *@
+<h2>Chart Usage</h2>
+
+@{ 
+    var beyondChar = new Chart(width:600, height: 400).
+    AddTitle("Girls").AddSeries(chartType:"column",xValue:new[] {"a","b"},yValues:new[] {"2","4"}).Write();
+}
+
+
+
+@* ========================= *@
+<h2>publish</h2>
+NuGet.Core.dll
+System.Web.WebPages.Administration.dll
+WebMatrix.Data.dll
+WebMatrix.WebData
+
+
+
+
+
+

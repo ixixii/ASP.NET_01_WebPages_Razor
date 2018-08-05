@@ -1,0 +1,375 @@
+﻿@*@{ Layout = "../Shared/_Layout.cshtml"; }*@
+
+@{ Layout = "layout.cshtml";
+    Page.Title = "BeyondPageTitle";
+}
+
+
+<span>
+    @RenderPage("header.cshtml")
+</span>
+
+
+<h2>Welcome to ASP.NET MVC @ViewData["Version"] on @ViewData["Runtime"]!</h2>
+<p>
+    now is @DateTime.Now
+</p>
+@{ var name = "Beyond"; }
+<p>
+    Hello @name
+</p>
+@{ var girlName = "mathilda";
+    var girlAge = 12;
+    var weekDay = DateTime.Now.DayOfWeek;
+    var greeting = "Hello " + name + "~ I am " + girlName + ", " + girlAge + " years old,Today is " + weekDay;
+}
+<p>
+    @greeting
+    <br />
+    ASP.NET 文件夹路径有 3 种工具：~ 运算符、Server.MapPath 方法 和 Href 方法。
+</p>
+
+@* ========================= *@
+<h2>HTTP POST DEMO</h2>
+@{
+    if (IsPost)
+    {
+        string loliName = Request["loliName"];
+        string loliAge = Request["loliAge"];
+        <p>
+            Welcome @loliName @loliAge years old
+        </p>
+    }
+    else
+    {
+        <form method="post" action="" style=" border:1px solid teal;border-radius:10px; margin:20px;padding:20px;width:200px;">
+            <div class="form-group">
+                <label for="id_girlName">girlName</label>
+                <input id="id_girlName" class="form-control"
+                       style="width:100px;" type="text" name="loliName" value=""
+                       placeholder="your name" /><br />
+            </div>
+
+            <div class="form-group">
+                <label for="id_girlAge">girlAge</label>
+                <input id="id_girlAge" class="form-control"
+                       style="width:100px;" type="text" name="loliAge" value=""
+                       placeholder="your age" /><br />
+            </div>
+            <input type="submit" class="btn btn-default" value="join" />
+        </form>
+    }
+}
+
+@* ========================= *@
+<h2>Choose Image for select options</h2>
+@{
+    var imgPath = "";
+    if (Request["selectImgName"] != null)
+    {
+        imgPath = "Views/Shared/" + Request["selectImgName"];
+    } }
+
+
+<form method="post" action="" style=" border:1px solid teal;border-radius:10px; margin:20px;padding:20px;width:200px;">
+
+
+    <div class="form-group">
+        <label>show me a image</label>
+        <select name="selectImgName" class="form-control">
+            <option value="1.jpg">image 1</option>
+            <option value="2.jpg">image 2</option>
+            <option value="3.jpg">image 3</option>
+        </select>
+    </div>
+    <input type="submit" class="btn btn-default" value="display" />
+
+    @if (imgPath != "")
+    {
+        <img style="margin-top:10px;border-radius:10px;" src="@imgPath" width="100%" height="auto" />
+        @*layout.cshtml*@
+        @Layout
+        <br />
+        @* System.Web.WebPages.DynamicPageDataDictionary`1[System.Object] *@
+        @Page
+        <br />
+        @*System.Web.HttpRequestWrapper*@
+        @Request
+        <br />
+        @*System.Web.HttpServerUtilityWrapper*@
+        @Server
+    }
+</form>
+
+
+
+
+@* ========================= *@
+<h2>Read Line From File</h2>
+@{
+    var filePath = Server.MapPath("~/Views/Shared/girl.csv");
+    Array girlArr = File.ReadAllLines(filePath);
+}
+
+
+@foreach (string lineStr in girlArr)
+{
+    foreach (string item in lineStr.Split(','))
+    {
+        @item <text>&nbsp;</text>
+    }
+    <br />
+}
+
+@*======*@
+<h2>Email Input Form</h2>
+<form method="post" action="" style=" border:1px solid teal;border-radius:10px; margin:20px;padding:20px;width:200px;">
+    <div class="form-group">
+        <label for="id_email">girlEmail</label>
+        <input id="id_email" class="form-control"
+               style="width: 100px;" type="text" name="girlEmail" value=""
+               placeholder="your email" /><br />
+    </div>
+
+    <div class="form-group">
+        <label for="id_content">girlContent</label>
+        <input id="id_content" class="form-control"
+               style="width: 100px;" type="text" name="girlContent" value=""
+               placeholder="your advise" /><br />
+    </div>
+
+    <input type="submit" class="btn btn-default" value="send" />
+</form>
+
+
+
+<h2>Read Input and Send Email</h2>
+@{
+    var girlEmail = Request["girlEmail"];
+    var girlContent = Request["girlContent"];
+    try
+    {
+        if (girlEmail != "" && girlEmail != null)
+        {
+            WebMail.SmtpServer = "smtp.sina.cn";
+            WebMail.SmtpPort = 25;
+            WebMail.EnableSsl = true;
+            WebMail.UserName = "xxxx@sina.cn";
+            WebMail.Password = "yyyy";
+            WebMail.From = "xxxx@sina.cn";
+
+            WebMail.Send(to: "308829827@qq.com", subject: "from " + girlEmail, body: girlContent);
+        }
+    }
+    catch (Exception e)
+    {
+        <text>@e.ToString()</text>
+    }
+}
+
+
+@*========= PHP =============*@
+<h2>PHP CODE</h2>
+<?php
+    echo phpinfo();
+?>
+
+
+@*========== Razor ==========*@
+<h2>Razor</h2>
+<ul class="list-group" style="margin:20px;width:400px;">
+    @for (int i = 0; i < 10; i++)
+    {
+        <li class="list-group-item">
+            @i
+        </li>
+    }
+</ul>
+
+
+<table class="table table-hover table-bordered table-striped">
+    <tr>
+        <th>time unit</th>
+        <th>number</th>
+    </tr>
+
+    <tr>
+        <td>Day</td>
+        <td>@DateTime.Now.Day</td>
+    </tr>
+    <tr>
+        <td>Hour</td>
+        <td>@DateTime.Now.Hour</td>
+    </tr>
+    <tr>
+        <td>Minute</td>
+        <td>@DateTime.Now.Minute</td>
+    </tr>
+    <tr>
+        <td>Second</td>
+        <td>@DateTime.Now.Second</td>
+    </tr>
+</table>
+
+
+@{
+    var msg = "";
+    if (DateTime.Now.Hour > 18)
+    {
+        msg = "Good Evening";
+    }
+    else
+    {
+        msg = "Good Day";
+    }
+}
+<p>
+    @msg
+</p>
+
+
+
+
+@{
+    var totalResult = "";
+    if (IsPost)
+    {
+        var num1 = Request["num1"];
+        var num2 = Request["num2"];
+        var total = num1.AsInt() + num2.AsInt();
+        totalResult = num1 + " + " + num2 + " Result is : " + total;
+    }
+}
+
+<form method="post" action=""
+      style=" border:1px solid teal;border-radius:10px; margin:20px;padding:20px;width:200px;">
+    <div class="form-group">
+        <label for="id_num1">number_1</label>
+        <input id="id_num1" class="form-control"
+               style="width: 100px;" type="text" name="num1" value=""
+               placeholder="first number" /><br />
+    </div>
+
+    <div class="form-group">
+        <label for="id_num2">number_2</label>
+        <input id="id_num2" class="form-control"
+               style="width: 100px;" type="text" name="num2" value=""
+               placeholder="second number" /><br />
+    </div>
+
+    <input type="submit" class="btn btn-default" value="Add" />
+</form>
+<p>
+    @totalResult
+</p>
+
+
+@*========== Razor ==========*@
+<h2>Razor Variable</h2>
+@{
+    var str1 = "beyond";
+    var number_1 = 67;
+    var today_1 = DateTime.Today;
+
+    string str2 = "Beyond";
+    int number_2 = 5267;
+    DateTime today_2 = DateTime.Today;
+}
+<p>
+    @today_2
+</p>
+
+
+@for (var i = 0; i < 10; i++)
+{
+    <button class="btn btn-default">btn @i</button>
+}
+
+
+<ul class="list-group" />
+@foreach (var item in Request.ServerVariables)
+{
+    <li class="list-group-item">
+        @item
+    </li>
+}
+
+</ul>
+
+
+@{
+    var i2 = 0;
+    while (i2 < 5)
+    {
+        i2 += 1;
+        <button class="btn btn-default btn-danger">btn @i2</button>
+    }
+}
+
+<br/><br />
+
+@{
+    string[] girlArr2 = { "Mathilda", "Saber", "Menma" };
+    int i3 = Array.IndexOf(girlArr2, "Mathilda");
+    int len = girlArr2.Length;
+    string sa = girlArr2[1];
+}
+@foreach (var girl in girlArr2)
+{
+    <button class="btn btn-default btn-primary">@girl</button>
+}
+
+<p>Mathilda is at : @i3</p>
+<p>length is : @len</p>
+<p>position 2 is : @sa</p>
+
+
+<br/><br/>
+@{ 
+    var age = 13;
+}
+
+
+@if (age > 18)
+{
+    <p>
+        adult
+    </p>
+} else if (age > 14){
+    <p> teenage </p> 
+} else if (age > 8)
+{
+    <p>lolita</p>
+} else
+{
+    <p> baby </p>
+}
+
+
+@{ 
+    var weekday = DateTime.Now.DayOfWeek;
+    var day = weekday.ToString();
+    msg = "";
+}
+
+@switch (day)
+{
+    case "Monday":
+        msg = "first weekday";
+        break;
+
+    case "Friday":
+        msg = "tomorrow is weekend";
+        break;
+
+    default:
+        msg = "today is " + day;
+        break;
+}
+<p>
+    @msg
+</p>
+
+<span>
+    @RenderPage("footer.cshtml")
+</span>
